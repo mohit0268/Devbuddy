@@ -9,6 +9,7 @@ import BASE_URL from '../../utils/CONSTANTS'
 const Login = () => {
   const [email,setEmailID]= useState('mohit1@gmail.com');
   const [password,setPassword] = useState('Mohit1@123');
+  const [error,setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
@@ -23,6 +24,7 @@ const Login = () => {
       return navigate('/');
     } 
     catch (error) {
+      setError(error?.response?.data);
       console.error("Axios error occured",error);
     }
   }
@@ -53,7 +55,7 @@ const Login = () => {
               />
             </fieldset>
           </div>
-
+          <p className="text-red-500 error-text">{error}</p>
           <div className="card-actions justify-center mt-2">
             <button className="btn btn-primary" onClick={loginChangeHandler}>Login</button>
           </div>
